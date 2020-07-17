@@ -32,7 +32,7 @@ func main() {
 	reply := helloCall.Reply.(*string)
 	fmt.Println(args)
 	// *是指针运算符 , 可以表示一个变量是指针类型 ,
-	// 也可以表示一个指针变量所指向的存储单元 , 也就是这个地址所存储的值 .
+	// 也可以表示一个指针变量所指向的存储单元 , 也就是这个地址所存储的值
 	fmt.Println(*reply)
 	// & 是取地址符号 , 即取得变量的地址
 	fmt.Println(&reply)
