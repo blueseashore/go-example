@@ -21,6 +21,8 @@ func main() {
 	}
 	helloCall := client.Go("HelloService.SayHello", &HelloRequest{Name: "ken", Message: "is me"}, new(string), nil)
 
+	// 其他操作
+
 	helloCall = <-helloCall.Done
 
 	if err := helloCall.Error; err != nil {
