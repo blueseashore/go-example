@@ -1,0 +1,19 @@
+// 详细说明，https://www.kaifaxueyuan.com/basic/protobuf3.html
+// 指定语法版本：proto3
+syntax = "proto3";
+
+// 指定对应的go文件的包名
+package pb;
+
+// 定义消息
+// 1，2，3，4不是具体字段的类型，而是字段编号
+// 1到15范围内的字段编号需要一个字节来编码
+// 16到2047范围内的字段编号需要两个字节
+// 不能使用数字19000到19999，FieldDescriptor::kFirstReservedNumber 到FieldDescriptor::kLastReservedNumber
+// 因为它们是为协议缓冲区实现而保留的
+message HelloRequest {
+    string name = 1;
+    string message = 2;
+    int32 age = 3;
+    int32 score = 4;
+}
