@@ -9,11 +9,15 @@ import (
 type HelloService struct {
 }
 
+// 定义请求消息的结构
 type HelloRequest struct {
 	Name    string
 	Message string
 }
 
+// 方法类型必须外部可见，所以首字母必须大写
+// 方法只有2个参数
+// 方法的返回值必须是error类型
 func (s *HelloService) SayHello(request *HelloRequest, response *string) error {
 	*response += request.Name + "," + request.Message
 	return nil
@@ -29,7 +33,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to accept:%v", err)
 	}
-	rpc.RegisterName("HelloService", &HelloService{})
+	_ = rpc.RegisterName("HelloService", &HelloService{})
 	// 启动服务，并将rpc服务绑定到conn上
 	rpc.ServeConn(conn)
 }
