@@ -1,2 +1,0 @@
-# go-example
-go-example
