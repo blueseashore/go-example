@@ -10,13 +10,15 @@ import (
 type Greeter struct {
 }
 
-func (g *Greeter) Hello(ctx context.Context, req *pb.Request, rsp *pb.Response) error {
-	rsp.Greeting = "Hello" + req.Name
+func (g *Greeter) Hello(ctx context.Context, req *pb.Request, res *pb.Response) error {
+	res.Greeting = "Hello " + req.Name
 	return nil
 }
 
 func main() {
-	service := micro.NewService(micro.Name("greeter"))
+	service := micro.NewService(
+		micro.Name("greeter"),
+	)
 
 	service.Init()
 
