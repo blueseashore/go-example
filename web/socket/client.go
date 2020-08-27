@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"log"
+	"net/http"
 	"net/url"
 	"os"
 	"os/signal"
@@ -11,7 +12,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
-var addr = flag.String("addr", "localhost:8080", "http service address")
+var addr = flag.String("addr", "localhost:8088", "http service address")
 
 func main() {
 	flag.Parse()
@@ -23,7 +24,11 @@ func main() {
 	u := url.URL{Scheme: "ws", Host: *addr, Path: "/echo"}
 	log.Printf("connecting to %s", u.String())
 
-	c, _, err := websocket.DefaultDialer.Dial(u.String(), nil)
+	headers := http.Header{}
+	token := []string{"douniwan"}
+	headers["token"] = token
+	c, _, err := websocket.DefaultDialer.Dial(u.String(), headers)
+	log.Println(c)
 	if err != nil {
 		log.Fatal("dial:", err)
 	}
@@ -40,6 +45,7 @@ func main() {
 				return
 			}
 			log.Printf("recv: %s", message)
+
 		}
 	}()
 
