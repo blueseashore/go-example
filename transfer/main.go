@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"strconv"
 )
 
@@ -47,7 +48,6 @@ func main() {
 	toInt8, _ := strconv.ParseInt(s, 10, 8)
 	fmt.Println(toInt8)
 
-
 	user := &User{
 		ID:   1,
 		Name: "hello",
@@ -55,8 +55,15 @@ func main() {
 	// struct 转 map
 	fmt.Println("struct 转 map")
 	m1 := make(map[string]interface{})
-	j,_ :=json.Marshal(user)
+	j, _ := json.Marshal(user)
 	fmt.Println(j)
 	_ = json.Unmarshal(j, &m1)
 	fmt.Println(m1)
+
+	// json 转 map
+	fmt.Println("json 转 map")
+	fileBytes, _ := ioutil.ReadFile("tag.json")
+	var conf = make(map[string]interface{})
+	_ = json.Unmarshal(fileBytes, &conf)
+	fmt.Println(conf)
 }
