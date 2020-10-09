@@ -1,9 +1,15 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"strconv"
 )
+
+type User struct {
+	ID   int
+	Name string
+}
 
 func main() {
 	// uintX 转 int
@@ -40,4 +46,17 @@ func main() {
 	// strconv.ParseInt(数字字符,字符当前位大小,字符需转换到的位大小)，字符需转换到的位大小：0,8,16,32,64
 	toInt8, _ := strconv.ParseInt(s, 10, 8)
 	fmt.Println(toInt8)
+
+
+	user := &User{
+		ID:   1,
+		Name: "hello",
+	}
+	// struct 转 map
+	fmt.Println("struct 转 map")
+	m1 := make(map[string]interface{})
+	j,_ :=json.Marshal(user)
+	fmt.Println(j)
+	_ = json.Unmarshal(j, &m1)
+	fmt.Println(m1)
 }
